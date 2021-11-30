@@ -201,7 +201,7 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 	3. 安装 fluent-dark 主题，图标、配色、鼠标
 	4. 调整 workspace behavior-desktop effects，选中 torch 改为400ms，每个都看看，喜欢就打开。
 
-15.  工作需要：装QIIME2
+15. 工作需要：装QIIME2
 	1. 安装 Miniconda3
 		1. `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
 		2. `bash Miniconda3-latest-Linux-x86_64.sh`
@@ -210,6 +210,7 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 		5. 新开terminal
 		6. 设置[TUNA源](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/)
 		7. `conda update conda`
+	
 	2. 装 QIIME2 2020.11
 		```shell
 		wget https://data.qiime2.org/distro/core/qiime2-2020.11-py36-linux-conda.yml
