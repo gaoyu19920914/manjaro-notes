@@ -124,47 +124,50 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 				找 HKEY_CURRENT_USER/Software/Wine/Fonts/Replacement 
 		 
 10. 连接设备的疑难杂症
-  1. 设置蓝牙键盘开机登陆前自动连接（方便输入账号密码） 
-    设置 `/etc/bluetooth/main.conf` 中的下面两行： 
-    ```
-    [Policy] 
-    AutoEnable=true
-    ``` 
-    （无需再）安装 bltui blueman 进行高级设置
-  2. 如果 HDMI 连接了支持耳机的显示器，却无法检测到音频设备，则需要输入 `systemctl --user restart pulseaudio` 临时解决
-  3. 永久解决休眠后 HDMI 音频无响应：
-	  system settings - hardware - audio - advanced - Automatically switch all running streams when a new output becomes available - check
-	如果还不行，可以继续参考[这里](https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#No_sound_after_resume_from_suspend)进行设置。
+	1. 设置蓝牙键盘开机登陆前自动连接（方便输入账号密码） 
+	设置 `/etc/bluetooth/main.conf` 中的下面两行： 
+	```
+	[Policy] 
+	AutoEnable=true
+	``` 
+	（无需再）安装 bltui blueman 进行高级设置
+	2. 如果 HDMI 连接了支持耳机的显示器，却无法检测到音频设备，则需要输入 `systemctl --user restart pulseaudio` 临时解决
+	3. 永久解决休眠后 HDMI 音频无响应：
+		system settings - hardware - audio - advanced - Automatically switch all running streams when a new output becomes available - check
+		如果还不行，可以继续参考[这里](https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#No_sound_after_resume_from_suspend)进行设置。
 	4. 多显示器分辨率问题解释：
-    以 surface 外接 1920x1080 显示器为例（其中位置x轴向右，y轴向下，坐标为显示器左上角点的坐标。需要先计算最小总分辨率，设置为 --fb参数）
-    运行 `xrandr --fb 3840x3984 --output eDP-1 --mode 2736x1824 --scale 1x1 --pos 0x2160 --output HDMI-1 --mode 1920x1080 --scale 2x2 --pos 0x0`。
-    此时外接显示器 plasma 桌面可能仅有 1/4 大小（因为`--scale 2x2`，需要重新运行 `plasmashell` 进程，即可。
-    （注意，通过此方法调整分辨率时，由于改变了总分辨率，因此触控屏无法“指哪打哪”）
-  5. 多显示器分辨率解决：
-    可将以下内容另存为 `dualscreen.sh` 
-    ```sh
-    #!/bin/sh
-    sleep 1
-    xrandr --fb 3840x3984 --output eDP-1 --mode 2736x1824 --scale 1x1 --pos 0x2160 --output HDMI-1 --mode 1920x1080 --scale 2x2 --pos 0x0
-    sleep 1
-    killall plasmashell
-    kstart5 plasmashell
-    ```
-    将以下内容另存为 `singlescreen.sh`
-    ```sh
-    #!/bin/sh
-    xrandr --output HDMI-1 --off
-    ```
-    需要时双击即可运行，也可以将 dualscreen.sh 通过`chmod +x dualscreen.sh`增加运行权限，然后再在 autostart 选中此文件，即可开机自动调整分辨率（只有连接了外接显示器，设置才有用）。
-  6. 触控板锁屏后无法保持自然滚动，解决办法如下：
-	  1. `sudo vim /usr/share/X11/xorg.conf.d/40-libinput.conf`
-	  2. 在 `identifier "libinput pointer catchall"` 的 `Driver "libinput"` 后添加 `Option "NaturalScrolling" "on"` 
-	  3. 如果还不行，再在 identifier touchpad 部分同样添加这一句 `Option "NaturalScrolling" "on"` 
-  7.  [enable camera on surface pro 6](https://github.com/linux-surface/linux-surface/wiki/Camera-Support) （不过这个成像质量真不行，发绿，而且目前Zoom和腾讯会议都无法检测到摄像头）
-    1. 运行 cam -l 查看是否已经能够检测到摄像头
-    2. 更改 `/etc/default/grub`中的`GRUB_CMDLINE_LINUX_DEFAULT`行，在其引号内末尾加入 `acpi_enforce_resources=lax`
-    3. 跟教程，重启，装 `libcamera`
-  8. surface pro 6 启动自动旋转屏幕：安装 `kded-rotation-git`
+		以 surface 外接 1920x1080 显示器为例（其中位置x轴向右，y轴向下，坐标为显示器左上角点的坐标。需要先计算最小总分辨率，设置为 --fb参数）
+		运行 `xrandr --fb 3840x3984 --output eDP-1 --mode 2736x1824 --scale 1x1 --pos 0x2160 --output HDMI-1 --mode 1920x1080 --scale 2x2 --pos 0x0`。
+		此时外接显示器 plasma 桌面可能仅有 1/4 大小（因为`--scale 2x2`，需要重新运行 `plasmashell` 进程，即可。
+		（注意，通过此方法调整分辨率时，由于改变了总分辨率，因此触控屏无法“指哪打哪”）
+	5. 多显示器分辨率解决：
+		可将以下内容另存为 `dualscreen.sh` 
+		
+		```sh
+		#!/bin/sh
+		sleep 1
+		xrandr --fb 3840x3984 --output eDP-1 --mode 2736x1824 --scale 1x1 --pos 0x2160 --output HDMI-1 --mode 1920x1080 --scale 2x2 --pos 0x0
+		sleep 1
+		killall plasmashell
+		kstart5 plasmashell
+		```
+		
+		将以下内容另存为 `singlescreen.sh`
+		
+		```sh
+		#!/bin/sh
+		xrandr --output HDMI-1 --off
+		```
+		需要时双击即可运行，也可以将 dualscreen.sh 通过`chmod +x dualscreen.sh`增加运行权限，然后再在 autostart 选中此文件，即可开机自动调整分辨率（只有连接了外接显示器，设置才有用）。
+	6. 触控板锁屏后无法保持自然滚动，解决办法如下：
+		1. `sudo vim /usr/share/X11/xorg.conf.d/40-libinput.conf`
+		2. 在 `identifier "libinput pointer catchall"` 的 `Driver "libinput"` 后添加 `Option "NaturalScrolling" "on"` 
+		3. 如果还不行，再在 identifier touchpad 部分同样添加这一句 `Option "NaturalScrolling" "on"` 
+	7.  [enable camera on surface pro 6](https://github.com/linux-surface/linux-surface/wiki/Camera-Support) （不过这个成像质量真不行，发绿，而且目前Zoom和腾讯会议都无法检测到摄像头）
+		1. 运行 cam -l 查看是否已经能够检测到摄像头
+		2. 更改 `/etc/default/grub`中的`GRUB_CMDLINE_LINUX_DEFAULT`行，在其引号内末尾加入 `acpi_enforce_resources=lax`
+		3. 跟教程，重启，装 `libcamera`
+	8. surface pro 6 启动自动旋转屏幕：安装 `kded-rotation-git`
 
 11. 设置自动关屏，为笔记本省电
 	system settings - power management - energy saving - screen energy saving - check
@@ -175,22 +178,22 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 	1. 解压： `unar *.zip -e GB2312` 以防打开中文环境生成的压缩包时出现乱码
 	2. 如果 vim 每次退出后都提醒 `Warning: Color name "BACKGROUND" is not defined`，运行 `xrdb /dev/null` 一次，就OK了。
 	3. firefox 设置触摸屏滚动（而非类似鼠标左键按下选中文字）
-	  1. `sudo -H vim /etc/environment`
-	  2. 添加一行`MOZ_USE_XINPUT2=1`
-	  3. 重启
-  4. 设置自动导入 ris 文件到 zotero（针对nature.com等未能正确标明文件类型的网站）
-    1. `vim ris-mime.xml`
-    2. paste the following content into the file:
-    ```xml
-      <?xml version="1.0"?>  
-      <mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>  
-          <mime-type type="application/x-research-info-systems type">  
-              <comment>.ris file</comment>  
-              <glob pattern="*.ris"/>  
-          </mime-type>  
-      </mime-info>  
-    ```
-    3. `xdg-mime install ris-mime.xml` 注册一下
+		1. `sudo -H vim /etc/environment`
+		2. 添加一行`MOZ_USE_XINPUT2=1`
+		3. 重启
+		4. 设置自动导入 ris 文件到 zotero（针对nature.com等未能正确标明文件类型的网站）
+			1. `vim ris-mime.xml`
+			2. paste the following content into the file:
+				```xml
+				<?xml version="1.0"?>  
+				<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>  
+				  <mime-type type="application/x-research-info-systems type">  
+				      <comment>.ris file</comment>  
+				      <glob pattern="*.ris"/>  
+				  </mime-type>  
+				</mime-info>  
+				```
+			3. `xdg-mime install ris-mime.xml` 注册一下
 
 14. 美化
 	1. 任务栏挪到上方，右键点击进入编辑模式-添加部件-下载 application title，并选择加粗，自定义桌面显示文字
