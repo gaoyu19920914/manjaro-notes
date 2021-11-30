@@ -210,7 +210,6 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 		5. 新开terminal
 		6. 设置[TUNA源](https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/)
 		7. `conda update conda`
-
 	2. 装 QIIME2 2020.11
 		```shell
 		wget https://data.qiime2.org/distro/core/qiime2-2020.11-py36-linux-conda.yml
@@ -220,7 +219,6 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 		```
 	3. 使用
 		`conda activate qiime2-2020.11`
-	
 	4. 分配 16G 的 [swapfile](https://wiki.manjaro.org/index.php?title=Swap#Using_a_Swapfile)
 		1. 开
 			```shell
