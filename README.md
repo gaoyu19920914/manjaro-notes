@@ -196,7 +196,7 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 			3. `xdg-mime install ris-mime.xml` 注册一下
 
 14. 美化
-	1. 任务栏挪到上方，右键点击进入编辑模式-添加部件-下载 application title，并选择加粗，自定义桌面显示文字
+	1. 任务栏挪到上方，右键点击进入编辑模式-添加部件-下载 application title，并选择加粗，自定义桌面显示文字。继续添加部件-下载 active window control，设置最大化后，左上角显示控制按钮。
 	2. 安装 latte-dock替代任务栏
 	3. 安装 fluent-dark 主题，图标、配色、鼠标
 	4. 调整 workspace behavior-desktop effects，选中 torch 改为400ms，每个都看看，喜欢就打开。
