@@ -103,7 +103,7 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 	
 
 9. 安装常用软件
-	1. Zotero，NutStore（通过archlinuxcn），Koi（自动切换深色模式，通过AUR安装），Flameshot（临时截图贴图工具），NeteaseMusic（国内可以装。国外可用网页版+Tampermonkey脚本“网易云音乐高音质支持”，绕开版权限制），vim，wps-office，ttf-wps-fonts，org.kde.discover
+	1. Zotero，NutStore（通过archlinuxcn,需要修改`/opt/nutstore/conf/nutstore.properties`中的webui.enable=false方能避免登录界面空白），Koi（自动切换深色模式，通过AUR安装），Flameshot（临时截图贴图工具），NeteaseMusic（国内可以装。国外可用网页版+Tampermonkey脚本“网易云音乐高音质支持”，绕开版权限制），vim，wps-office，ttf-wps-fonts，org.kde.discover
 	2. 以上可通过 pamac 或第4步，添加 archlinuxcn 源后搜索并点击按钮直接安装
 		（注意事项：要先安装 jdk 才能给 LibreOffice 添加 Zotero 插件。
 	3. 对 Linux 支持极差的软件的安装（如微信、TIM、qq）：
