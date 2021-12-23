@@ -137,8 +137,9 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 		如果还不行，可以继续参考[这里](https://wiki.archlinux.org/index.php/PulseAudio/Troubleshooting#No_sound_after_resume_from_suspend)进行设置。
 	4. 多显示器分辨率问题解释：
 		以 surface 外接 1920x1080 显示器为例（其中位置x轴向右，y轴向下，坐标为显示器左上角点的坐标。需要先计算最小总分辨率，设置为 --fb参数）
-		运行 `xrandr --fb 3840x3984 --output eDP-1 --mode 2736x1824 --scale 1x1 --pos 0x2160 --output HDMI-1 --mode 1920x1080 --scale 2x2 --pos 0x0`。
+		运行 `xrandr --fb 3840x3984 --output eDP-1 --mode 2736x1824 --scale 0.9999x0.9999 --pos 0x2160 --output HDMI-1 --mode 1920x1080 --scale 2x2 --pos 0x0`。
 		此时外接显示器 plasma 桌面可能仅有 1/4 大小（因为`--scale 2x2`，需要重新运行 `plasmashell` 进程，即可。
+		（PS:scale 0.9999x0.9999 是为了避免移动鼠标时光标闪烁，我的猜想：1x1时会闪烁，是因为先计算了2x2的算法坐标，后来除以2回到1,发现奇数的算法坐标可以除尽没有余数，就以为渲染成功，最后一步才发现硬件坐标没有这些点，重新渲染到临近坐标。因此移动鼠标时，重复闪烁。0.9999x0.9999在恢复计算时除以2/0.9999,有余数，直接渲染到临近坐标。我的猜想由于只是猜想，懒得翻代码验证了，感兴趣的可以翻一下xrandr的scaling相关的代码。[Ref](https://wiki.archlinux.org/title/HiDPI#Side_display)）
 		（注意，通过此方法调整分辨率时，由于改变了总分辨率，因此触控屏无法“指哪打哪”）
 	5. 多显示器分辨率解决：
 		可将以下内容另存为 `dualscreen.sh` 
