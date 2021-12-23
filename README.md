@@ -176,7 +176,7 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 12. 其他参考资料（链接均已失效，可搜索同名内容参考）：fcitx5的安装、Manjaro安装体验小结
 
 13. 日常使用小技巧
-	1. 解压： `unar *.zip -e GB2312` 以防打开中文环境生成的压缩包时出现乱码
+	1. 解压： `unar *.zip -e GB2312`或`unzip -O CP936`以防打开中文环境生成的压缩包时出现乱码，据说CP936可以换为 GBK/GB18030 [Ref](cnblogs.com/pandachen/p/4804860.html)
 	2. 如果 vim 每次退出后都提醒 `Warning: Color name "BACKGROUND" is not defined`，运行 `xrdb /dev/null` 一次，就OK了。
 	3. firefox 设置触摸屏滚动（而非类似鼠标左键按下选中文字）
 		1. `sudo -H vim /etc/environment`
@@ -202,7 +202,10 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 	3. 安装 fluent-dark 主题，图标、配色、鼠标
 	4. 调整 workspace behavior-desktop effects，选中 torch 改为400ms，每个都看看，喜欢就打开。
 
-15. 工作需要：装QIIME2
+15. 一些小技巧
+	1. Zotero 英文环境下中文字体渲染：更改 about:config 中的 font.name.sans-serif.ja 的第一条改为 Microsoft Yahei 或者 Noto Sans CJK SC
+	2. 
+16. 工作需要：装QIIME2
 	1. 安装 Miniconda3
 		1. `wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh`
 		2. `bash Miniconda3-latest-Linux-x86_64.sh`
