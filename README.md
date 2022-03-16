@@ -122,6 +122,9 @@ Notes about Manjaro installation and settings, with a strong personal taste.
 		6. （旧版 wine 的方法）设置 wine 字体替换： 
 				`WINEPREFIX=~/.deepinwine/Deepin-XXXX/ deepin-wine regedit`
 				找 HKEY_CURRENT_USER/Software/Wine/Fonts/Replacement 
+				
+		7. 软链接 wine wechat qq 的字体，使之在升级后仍正常显示各种中文字体（而非方块）
+				sudo ln -s /windows/Windows/Fonts/ ~/.deepinwine/Deepin-WeChat/drive_c/windows/
 		 
 10. 连接设备的疑难杂症
 	1. 设置蓝牙键盘开机登陆前自动连接（方便输入账号密码） 
